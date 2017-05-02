@@ -145,8 +145,8 @@ def  main():
             host=dict(required=True),
             deviceType=dict(required=True),
             username=dict(required=True),
-            password=dict(required=True),
-            enablePassword=dict(required=False),),
+            password=dict(required=True, no_log=True),
+            enablePassword=dict(required=False, no_log=True),),
         supports_check_mode=False)
 
     username = module.params['username']
