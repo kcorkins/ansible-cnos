@@ -42,7 +42,7 @@ def interfaceConfig(obj,deviceType, prompt,timeout,interfaceArg1,interfaceArg2,i
                 else:
                     retVal = "Error-102"
                     return retVal
-        
+
         retVal = retVal + interfaceLevel2Config(obj, deviceType, newPrompt, timeout, interfaceArg3, interfaceArg4,
                                        interfaceArg5, interfaceArg6, interfaceArg7, interfaceArg8, interfaceArg9)
     elif(interfaceArg1 == "port"):
@@ -2418,13 +2418,15 @@ def doRunningConfigBackUp(protocol, timeout, confServerIp, confPath, confServerU
 
     #config backup command happens here
     if(protocol == "ftp"):
-        command = "cp running-config "+protocol+" "+protocol+"://"+username+"@"+server+"/"+path+" vrf management\n"
+        command = "copy running-config "+protocol+" "+protocol+"://"+username+"@"+server+"/"+path+" vrf management\n"
         #debugOutput(command)
         retVal = retVal+ waitForDeviceResponse(command, "Password:", 3, obj)
         #debugOutput(command)
         retVal = retVal+ waitForDeviceResponse(password, "#", timeout, obj)
     elif(protocol == "tftp"):
-        command = "cp running-config "+protocol+" "+protocol+"://"+server+"/"+path+" vrf management\n"
+        command = "copy running-config "+protocol+" +address "+server+" + filename "+path"\n"
+        # command = "cp running-config "+protocol+" "+protocol+"://"+server+"/"+path+" vrf management\n"
+
         #debugOutput(command)
         retVal = retVal+ waitForDeviceResponse(command, "#", 3, obj)
     else:
@@ -2454,7 +2456,7 @@ def doSecureRunningConfigBackUp(protocol, timeout, confServerIp, confPath, confS
     retVal = ""
 
     #config backup command happens here
-    command = "cp running-config "+protocol+" "+protocol+"://"+username+"@"+server+"/"+path+" vrf management\n"
+    command = "copy running-config "+protocol+" "+protocol+"://"+username+"@"+server+"/"+path+" vrf management\n"
     #debugOutput(command)
     response = waitForDeviceResponse(command, "(yes/no)", 3, obj)
     if(response.lower().find("error-101")):

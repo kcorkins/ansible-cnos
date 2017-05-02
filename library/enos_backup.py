@@ -187,6 +187,7 @@ import array
 import json
 import time
 import re
+import enos_utility
 try:
     import cnos_utility
     HAS_LIB=True
@@ -262,16 +263,16 @@ def  main():
     # Invoke method for config transfer from server
     if(configType == 'running-config'):
         if(protocol == "tftp" or protocol == "ftp"):
-            transfer_status = cnos_utility.doRunningConfigBackUp(protocol, tftptimeout, rcserverip, rcpath, serveruser, serverpwd, remote_conn)
+            transfer_status = enos_utility.doRunningConfigBackUp(protocol, tftptimeout, rcserverip, rcpath, serveruser, serverpwd, remote_conn)
         elif(protocol == "sftp" or protocol == "scp"):
-            transfer_status = cnos_utility.doSecureRunningConfigBackUp(protocol, timeout, rcserverip, rcpath, serveruser, serverpwd, remote_conn)
+            transfer_status = enos_utility.doSecureRunningConfigBackUp(protocol, timeout, rcserverip, rcpath, serveruser, serverpwd, remote_conn)
         else:
             transfer_status = "Invalid Protocol option"
     elif(configType == 'startup-config'):
         if(protocol == "tftp" or protocol == "ftp"):
-            transfer_status = cnos_utility.doStartupConfigBackUp(protocol, tftptimeout, rcserverip, rcpath, serveruser, serverpwd, remote_conn)
+            transfer_status = enos_utility.doStartupConfigBackUp(protocol, tftptimeout, rcserverip, rcpath, serveruser, serverpwd, remote_conn)
         elif(protocol == "sftp" or protocol == "scp"):
-            transfer_status = cnos_utility.doSecureStartupConfigBackUp(protocol, timeout, rcserverip, rcpath, serveruser, serverpwd, remote_conn)
+            transfer_status = enos_utility.doSecureStartupConfigBackUp(protocol, timeout, rcserverip, rcpath, serveruser, serverpwd, remote_conn)
         else:
             transfer_status = "Invalid Protocol option"
     else:
