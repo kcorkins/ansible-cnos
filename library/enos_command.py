@@ -180,6 +180,9 @@ def  main():
     #Make terminal length = 0
     output = output + cnos_utility.waitForDeviceResponse("terminal-length 0\n","#", 2, remote_conn)
 
+    #Disable console prompts
+    output = output + cnos_utility.waitForDeviceResponse("terminal dont-ask\n","#", 2, remote_conn)
+
     #Go to config mode
     output = output + cnos_utility.waitForDeviceResponse("configure t\n","(config)#", 2, remote_conn)
 
